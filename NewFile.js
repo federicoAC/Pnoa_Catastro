@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 
 function MenuOnOff(){
 	var miMenu=document.getElementById("envuelta");
@@ -27,7 +25,7 @@ function imprimir(){
 		alert("Para imprimir presione Crtl+Shift+P");
 
 };
-
+/*
 function imprSelec(nombre)
 {
   var ficha = document.getElementById(nombre);
@@ -37,7 +35,7 @@ function imprSelec(nombre)
   ventimp.print( );
   ventimp.close();
 };
-
+*/
 function funcionGenerica(){
 	alert("funcion generica");
 };

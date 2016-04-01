@@ -32,8 +32,8 @@ var pnoa = new ol.layer.Tile({
 	})
 });
 
-/*catastroParc*/
-var catastroParc = new ol.layer.Image({
+/*rustica*/
+var rustica = new ol.layer.Image({
 	name:'rustica',
 	source : new ol.source.ImageWMS({
 		url : 'http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx',
@@ -57,6 +57,9 @@ var catastro = new ol.layer.Image({
 		serverType : 'geoserver'
 	})
 });
+/*Capa Vectorial para marcadores, medidas, ...*/
+//var vectorLayer = new ol.Layer.Vector();
+
 
 /*posicion del raton en EPSG3857*/
 var raton3857 = new ol.control.MousePosition({
@@ -70,7 +73,7 @@ var raton3857 = new ol.control.MousePosition({
 var raton4326 = new ol.control.MousePosition({
 	coordinateFormat: ol.coordinate.createStringXY(6),
 	projection: 'EPSG:4326',
-	target: document.getElementById('info'),
+	target: document.getElementById('miPosicion'),
 	undefinedHTML: '&nbsp;'
 	});
 	
@@ -85,7 +88,6 @@ var map = new ol.Map({
 		zoom: false,
 		attribution: false,
 		rotate: false,
-//		new OpenLayers.Control.LayerSwitcher({'ascending':false}),¡¡¡PRIVADO!!!.
 	}).extend( [raton4326] ),
 	view : new ol.View({
 		projection : new ol.proj.Projection({
@@ -101,15 +103,19 @@ var map = new ol.Map({
 	
 });
 
-map.addLayer(pnoa);/* la base pnoa */
-map.addLayer(catastro);
-map.addLayer(catastroParc);
+map.addLayer(pnoa);// base = pnoa 
+map.addLayer(catastro);// capa1
+map.addLayer(rustica);
+map.addControl(new ol.control.ScaleLine({units:'meter'}));//control.
+	
 
 function CatastralOnOff(){	
 if(catastro.get('visible')){
 	catastro.setProperties({visible: false});
+	rustica.setProperties({visible: false});
 }else{
 	catastro.setProperties({visible: true});
+	rustica.setProperties({visible: true});
 }
 };
 
@@ -129,22 +135,58 @@ function zoomInicial(){
 };
 
 function DarPosicionClick(){
-	map.addControl(new OpenLayers.Control.MousePosition({numDigits:2}));
+/*	map.on('onmousedown',function(evt){
+		var coord =  evt.coordinate({
+		coordinateFormat: ol.coordinate.createStringXY(2),
+		projection: 'EPSG:4326'
+		});
+	)
+	var template = 'Coordinate is ({x}|{y}).';
+	var out = ol.coordinate.format(coord, template, 2);
+	alert(out);
+	});
+/*	map.events.register("click", map, function(e) {
+                var lonlat = map.getLonLatFromViewPortPx(e.xy);
+                alert(lonlat.lat + " - " +lonlat.lon);
+	});
+alert("DarPosicionClick");
+*/
 };
-
-function LeerCapas(){
-	var capas = map.getLayers();
-	var lay = capas.item(i);
-		alert("lay =" + capas.item(i) + ", Capa: " + lay.get('name'));
-		alert("Fuente Url: " + (lay.getSource()).getUrl());
+/*
+function Medir(){
+	//ojo unidades grados o metros.
+	var point1 = new ol.Geometry.Point(-4.725, 41.584),//unidades grados.
+	var point2 = new ol.Geometry.Point(-4.720, 41.588),
+	var line = new ol.Geometry.Curve([point1, point2]);
+	var distance = line.getGeodesicLength();
+	var featureline = new ol.Feature.Vector(new ol.Geometry.Line(line),
+		{some:'data'},
+		{externalGraphic:'imagenes/marker.png',graphicHeigth:21,graphicWidth:16});
+		
+	vectorlayers.addFeatures(featureline);
+	map.addLayer(vectorLayer);
+	
+	alert("Distancia desde " + point1 + " a " + point2 + " es de: " + distance);
 };
+*/
 
 function EnumerarCapas(){
 	var capas = map.getLayers();
 	var indice = capas.getLength();
 	
-//	for (i = 0; i < indice; i++) {
-	for (i = 1; i < indice; i++) {//0 es el WMTS
+//	capa base
+	var base = capas.item(0);
+	alert("Capa base: " + base.get('name')
+			+"\n - Opacidad: " + base.get('opacity')
+			+"\n - Visibilidad: " + base.get('visible')
+			+"\n - Z-Index: " + base.get('z-index')
+			+"\n - Resolucion Maxima: " + base.get('maxResolution')
+			+"\n - Resolucion Minima: " + base.get('minResolution')
+//discrimina si es WMS  WMTS, si WMTS falla
+//			+"\n - Fuente Url: " + (base.get('source')).getUrl()
+			);
+//resto de capas:
+	for (i = 1; i < indice; i++) {
 		var lay = capas.item(i);
 				
 		alert("Capa: " + lay.get('name')
@@ -153,14 +195,68 @@ function EnumerarCapas(){
 			+"\n - Z-Index: " + lay.get('z-index')
 			+"\n - Resolucion Maxima: " + lay.get('maxResolution')
 			+"\n - Resolucion Minima: " + lay.get('minResolution')
-/*discrimina si es WMS ó WMTS, si WMTS falla*/
 			+"\n - Fuente Url: " + (lay.get('source')).getUrl()
-			
-//			+"\n - Fuente Url: " + (catastro.get('source')).getUrl()
-//			+"\n - Fuente Url: " + (catastro.getSource()).getUrl()
+
 		);
 	};	
 };
+
+
+function TablaEnumerarCapas(){
+	if(document.getElementById('tablaH').style.display === "none"){
+		document.getElementById('tablaH').style.display = "block";
+	
+		var capas = map.getLayers();
+		var indice = capas.getLength();
+		var capa = "";
+		target: document.getElementById('tablaH');
+		undefinedHTML: '&nbsp;';
+		var tablaCapas = "<table border='1'><tr><td colspan='7' align='middle'>Capas</td></tr>"
+					+"<tr><td>Nombre</td><td>Opacidad</td><td>Visibilidad</td>"
+					+"<td>z-index</td><td>Resolucion Max - Min</td>"
+					+"<td>Fuente Url</td>"
+					+"</tr>"
+	//	capa base
+		var base = capas.item(0);
+		var urls = base.get('source').getUrls();
+			capa =(
+				"<tr>"
+				+"<td>" + base.get('name') + "</td>"
+				+"<td>" + base.get('opacity') + "</td>"
+				+"<td>" + base.get('visible') + "</td>"
+				+"<td>" + base.get('z-index') + "</td>"
+				+"<td>" + base.get('maxResolution') + " - " + base.get('minResolution')+ "</td>"
+				+"<td>" + (base.get('source').getUrls())[0] + "</td>"
+	//			+"<td>" + urls[0] + "</td>"
+				+"</tr>"
+			);
+			tablaCapas += capa;
+			
+			
+	//resto de capas:	
+		for (i = 1; i < indice; i++) {
+			var lay = capas.item(i);
+			capa="";		
+			capa =(
+				"<tr>"
+				+"<td>" + lay.get('name') + "</td>"
+				+"<td>" + lay.get('opacity') + "</td>"
+				+"<td>" + lay.get('visible') + "</td>"
+				+"<td>" + lay.get('z-index') + "</td>"
+				+"<td>" + lay.get('maxResolution') + " - " + lay.get('minResolution')+ "</td>"
+				+"<td>" + (lay.get('source')).getUrl() + "</td>"
+				+"</tr>"		
+			);
+			tablaCapas += capa; 	
+		};
+		tablaCapas += "</table>";
+		document.getElementById('tablaH').innerHTML = tablaCapas;
+	}else{
+		document.getElementById('tablaH').style.display = "none";
+	}
+};
+
+
 
 // GETFEATUREINFO
 
@@ -176,5 +272,7 @@ map.on('singleclick', function (evt) {
 	if (url) {
 //		document.getElementById('info').innerHTML = ""+url;
 		alert(""+url);
+	}else{
+		alert("Sin Datos");
 	}
 });

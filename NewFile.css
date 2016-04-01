@@ -47,6 +47,17 @@ body{
 	width: 100%;
 }
 
+.tablaH{
+	position:absolute;
+	bottom:30px;
+	display:none;
+	z-index: 2;
+	background-color:#2290cb;
+	color:white;
+    opacity:0.8;
+	
+}
+
 .envuelta{
 	position:absolute;
 	display:none;
@@ -88,7 +99,7 @@ body{
 .logo{
 	position:absolute;
 /*	display:block;*/
-	display:inline;
+	display:block;
 	left:90%;
     bottom:5px;
     z-index: 10;
@@ -104,14 +115,12 @@ body{
     z-index: 10;
 }
 .miPosicion{
-	position:absolute;
+	position:relative;
 	right:0px;
 	bottom:0px;
-	
-	
-	
-	
-	
+	z-index: 3; 
+	background-color: black;
+	color:lightyellow;	
 }
 .posicionRaton{	
 	font-size:48px;
@@ -121,7 +130,7 @@ body{
     z-index: 3; 
 	background-color: lightyellow;	
 }
-*/
+
 img{
 	position:relative;
 /*	bottom:2px;*/
