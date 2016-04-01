@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!--
+<link rel="stylesheet" href="http://openlayers.org/en/v3.14.2/css/ol.css" type="text/css">
+<script src="http://openlayers.org/en/v3.14.2/build/ol.js"></script>
+-->
+<link rel="stylesheet" href="./NewFile.css" type="text/css">
+<link rel="stylesheet" href="./ol.css" type="text/css">
+<script type="text/javascript" src="./NewFile.js"></script>
+<script type="text/javascript" src="./ol.js"></script>
+<title>Voxel3D_20160405</title>
+</head>
+<body>
+		
+	<div id="map" class="map">
+		<img class="burguer" src="./Imagenes/glyphicons-517-menu-hamburger.png"
+			alt="517-menu-hamburger.png" align="middle" WIDTH=100% BORDER=1
+			title="517-menu-hamburger.png" onclick="MenuOnOff()">
+		<div id="dibujo" class="dibujo">
+			<img src="./Imagenes/glyphicons-98-vector-path-line.png"
+				onclick="funcionGenerica()" title="linea">
+			<img src="./Imagenes/glyphicons-95-vector-path-square.png"
+				onclick="funcionGenerica()" title="area">
+			<img src="./Imagenes/glyphicons-97-vector-path-polygon.png"
+				onclick="funcionGenerica()" title="poligono">
+			<img src="./Imagenes/glyphicons-100-vector-path-all.png"
+				onclick="funcionGenerica()" title="ruta">
+			<img src="./Imagenes/glyphicons-96-vector-path-circle.png"
+				onclick="funcionGenerica()" title="circulo">
+			<img src="./Imagenes/glyphicons-99-vector-path-curve.png"
+				onclick="funcionGenerica()" title="curva">
+		</div>
+		
+	</div>
+	
+	<div id="tablaH"></div>
+
+	<script src="./NewFileJS.js"></script>
+		
+	<div id="envuelta" class="envuelta">
+		<img src="./Imagenes/glyphicons-191-plus-sign.png" onclick="zoomMas()" title="Zoom +"> 
+		<img src="./Imagenes/glyphicons-192-minus-sign.png" onclick="zoomMenos()"  title="Zoom -"> 
+		<img src="./Imagenes/glyphicons-21-home.png" onclick="zoomInicial()" title="Zoom Inicial"> 
+<!--		<img src="./Imagenes/glyphicons-225-chevron-left.png" onclick="" title="<"> -->
+		<img src="./Imagenes/glyphicons-235-brush.png" onclick="DibujoOnOff()" title="Paleta">
+		<img src="./Imagenes/glyphicons-243-map-marker.png" onclick="DarPosicionClick()" title="Marcador"> 
+		<img src="./Imagenes/glyphicons-69-ruler.png" onclick="" title="Medir"> 
+		<img src="./Imagenes/glyphicons-320-sort.png" onclick="EnumerarCapas()" title="Capas"> 
+<!--		<img src="./Imagenes/glyphicons-156-show-big-thumbnails.png" onclick="mapasBaseGal()" title="Mapas Base">
+			<img src="./Imagenes/glyphicons-16-print.png" onclick="imprSelec('map')">  -->
+		<img src="./Imagenes/glyphicons-16-print.png" onclick="imprimir()"  title="Imprimir">  
+<!--		<img src="./Imagenes/glyphicons-42-charts.png" onclick="" title="graficos">  -->
+		<img src="./Imagenes/glyphicons-321-filter.png" onclick=""  title="filtrar"> 
+<!--		<img src="./Imagenes/glyphicons-224-chevron-right.png" onclick="" title=">">  -->
+		<img src="./Imagenes/glyphicons-120-table.png" onclick="" title="Tablas"> 
+		<img src="./Imagenes/glyphicons-196-info-sign.png" onclick="" title="Informacion"> 
+		<img src="./Imagenes/glyphicons-740-cadastral-map.png" onclick="CatastralOnOff()" title="Catastral"> 
+		<img src="./Imagenes/glyphicons-122-message-empty.png" onclick="SocialOnOff()" title="Contacto">
+
+	</div>
+	<div id="social" class="social">	
+		<img src="./Imagenes/glyphicons-social-31-facebook.png" onclick="" title="Contacto facebook">											
+		<img src="./Imagenes/glyphicons-social-32-twitter.png" onclick="" title="Contacto twitter">						
+		<img src="./Imagenes/glyphicons-social-18-linked-in.png" onclick="" title="Contacto linked-in">						
+		<img src="./Imagenes/glyphicons-social-38-rss.png" onclick="" title="noticias RSS">
+						
+	</div>
+	<div id="logo" class="logo">
+		<img id="Voxel3D" src="./Imagenes/logoVoxel3D.PNG" onclick="" title="Voxel3D">
+		<div id="info" class="info"/>
+		<div id="miPosicion" class="miPosicion"/> 
+<!--			<label id="posicionRaton" cols="40" value="Grados: ">mmmmmmmmmmm</label>-->
+<!--		</div> -->
+<!--		<textarea id="posicionRaton" cols="40"></textarea>-->		
+	</div>
+	
+</body>
+</html>
