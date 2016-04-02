@@ -6,11 +6,12 @@
 <link rel="stylesheet" href="http://openlayers.org/en/v3.14.2/css/ol.css" type="text/css">
 <script src="http://openlayers.org/en/v3.14.2/build/ol.js"></script>
 -->
-<link rel="stylesheet" href="./NewFile.css" type="text/css">
 <link rel="stylesheet" href="./ol.css" type="text/css">
-<script type="text/javascript" src="./NewFile.js"></script>
+<link rel="stylesheet" href="./NewFile.css" type="text/css">
 <script type="text/javascript" src="./ol.js"></script>
-<title>Voxel3D_20160408</title>
+<script type="text/javascript" src="./NewFile.js"></script>
+
+<title>Voxel3D_20160409</title>
 </head>
 <body>
 		
@@ -46,7 +47,7 @@
 		<img src="./Imagenes/glyphicons-21-home.png" onclick="zoomInicial()" title="Zoom Inicial"> 
 <!--		<img src="./Imagenes/glyphicons-225-chevron-left.png" onclick="" title="<"> -->
 		<img src="./Imagenes/glyphicons-235-brush.png" onclick="DibujoOnOff()" title="Paleta">
-		<img src="./Imagenes/glyphicons-243-map-marker.png" onclick="DarPosicionClick()" title="Marcador"> 
+		<img src="./Imagenes/glyphicons-243-map-marker.png" onmousedown="DarPosicion()" title="Marcador"> 
 		<img src="./Imagenes/glyphicons-69-ruler.png" onclick="Medir()" title="Medir"> 
 		<img src="./Imagenes/glyphicons-320-sort.png" onclick="EnumerarCapas()" title="Capas"> 
 <!--		<img src="./Imagenes/glyphicons-156-show-big-thumbnails.png" onclick="mapasBaseGal()" title="Mapas Base">
@@ -69,9 +70,10 @@
 						
 	</div>
 	<div id="logo" class="logo">
-		<img id="Voxel3D" src="./Imagenes/logoVoxel3D.PNG" onclick="Voxel3D()" title="Voxel3D">
+		<div id="miPosicion" class="ol-mouse-position"></div> 
+		<div id="vox" class="vox"><img id="Voxel3D" src="./Imagenes/logoVoxel3D.PNG" onclick="Voxel3D()" title="Voxel3D"></div>
 		
-		<div id="miPosicion" class="miPosicion"></div> 
+		
 <!--			<label id="posicionRaton" cols="40" value="Grados: ">mmmmmmmmmmm</label>-->
 <!--		</div> -->
 <!--		<textarea id="posicionRaton" cols="40"></textarea>-->		
