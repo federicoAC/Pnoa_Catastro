@@ -7,11 +7,27 @@
 <script src="http://openlayers.org/en/v3.14.2/build/ol.js"></script>
 -->
 <link rel="stylesheet" href="./ol.css" type="text/css">
-<link rel="stylesheet" href="./NewFile.css" type="text/css">
 <script type="text/javascript" src="./ol.js"></script>
-<script type="text/javascript" src="./NewFile.js"></script>
 
-<title>Voxel3D_20160409</title>
+<!--	<script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol-debug.min.js" type="text/javascript"></script>-->
+
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.6/proj4.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js" type="text/javascript"></script>
+
+    <script src="http://dev.mobivap.es/~voxel/api/js/WMEView.js"></script>
+    <script src="http://dev.mobivap.es/~voxel/api/js/_WME_.js"></script>
+    <link rel="stylesheet" href="http://dev.mobivap.es/~voxel/api/css/wme.css" type="text/css">
+
+    <link rel="stylesheet" href="voxel_tools/voxel_layertree/voxel_layertree.css">
+    <script src="voxel_tools/voxel_layertree/voxel_layertree.js"></script>
+
+    <script src="js/layers.js"></script>
+    <script src="js/cadaster.js"></script>
+	
+<script type="text/javascript" src="./NewFile.js"></script>
+<link rel="stylesheet" href="./NewFile.css" type="text/css">
+<title>Voxel3D_2016013</title>
 </head>
 <body>
 		
@@ -45,9 +61,9 @@
 		<img src="./Imagenes/glyphicons-191-plus-sign.png" onclick="zoomMas()" title="Zoom +"> 
 		<img src="./Imagenes/glyphicons-192-minus-sign.png" onclick="zoomMenos()"  title="Zoom -"> 
 		<img src="./Imagenes/glyphicons-21-home.png" onclick="zoomInicial()" title="Zoom Inicial"> 
-<!--		<img src="./Imagenes/glyphicons-225-chevron-left.png" onclick="" title="<"> -->
+		<img src="./Imagenes/glyphicons-186-screenshot.png" onclick="ReferenciaCatastral()" title="Posición"> 
 		<img src="./Imagenes/glyphicons-235-brush.png" onclick="DibujoOnOff()" title="Paleta">
-		<img src="./Imagenes/glyphicons-243-map-marker.png" onmousedown="DarPosicion()" title="Marcador"> 
+		<img src="./Imagenes/glyphicons-243-map-marker.png" onmousedown="Marcador()" title="Marcador"> 
 		<img src="./Imagenes/glyphicons-69-ruler.png" onclick="Medir()" title="Medir"> 
 		<img src="./Imagenes/glyphicons-320-sort.png" onclick="EnumerarCapas()" title="Capas"> 
 <!--		<img src="./Imagenes/glyphicons-156-show-big-thumbnails.png" onclick="mapasBaseGal()" title="Mapas Base">
@@ -57,7 +73,7 @@
 		<img src="./Imagenes/glyphicons-321-filter.png" onclick=""  title="filtrar"> 
 <!--		<img src="./Imagenes/glyphicons-224-chevron-right.png" onclick="" title=">">  -->
 		<img src="./Imagenes/glyphicons-120-table.png" onclick="TablaEnumerarCapas()" title="Tablas"> 
-		<img src="./Imagenes/glyphicons-196-info-sign.png" onclick="" title="Informacion"> 
+		<img src="./Imagenes/glyphicons-196-info-sign.png" onclick="Informacion()" title="Informacion"> 
 		<img src="./Imagenes/glyphicons-740-cadastral-map.png" onclick="CatastralOnOff()" title="Catastral"> 
 		<img src="./Imagenes/glyphicons-122-message-empty.png" onclick="SocialOnOff()" title="Contacto">
 
@@ -70,7 +86,7 @@
 						
 	</div>
 	<div id="logo" class="logo">
-		<div id="miPosicion" class="ol-mouse-position"></div> 
+<!--	<div id="miPosicion" class="ol-mouse-position"></div>   -->
 		<div id="vox" class="vox"><img id="Voxel3D" src="./Imagenes/logoVoxel3D.PNG" onclick="Voxel3D()" title="Voxel3D"></div>
 		
 		
